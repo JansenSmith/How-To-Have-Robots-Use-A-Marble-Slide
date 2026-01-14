@@ -32,15 +32,15 @@ Students will use manual mode to find and record key positions:
 **Program structure (same for both arms):**
 ```
 FOREVER
-├─ Move to Home position
-├─ WAIT for bumper switch press
-├─ Wait 2 seconds (adjust as needed)
-├─ Move to Marble pickup position
-├─ Close gripper (grab marble)
-├─ Move to Marble dropoff position  
-├─ Open gripper (release marble)
-├─ Move to Bumper switch press position
-└─ (loop repeats automatically)
+  Move to Home position
+  WAIT for bumper switch press
+  Wait 2 seconds (adjust as needed)
+  Move to Marble pickup position
+  Close gripper (grab marble)
+  Move to Marble dropoff position  
+  Open gripper (release marble)
+  Move to Bumper switch press position
+  (loop repeats automatically)
 ```
 
 **Key programming concepts:**
