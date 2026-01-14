@@ -8,7 +8,6 @@ permissions:
   contents: write
 
 jobs:
-
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
@@ -22,25 +21,14 @@ jobs:
       - run: echo $PWD
       - run: ls -al ./
       - run: ls -al ../
-      - run: pandoc  --standalone  --self-contained  --embed-resources --from markdown --output=How-To-Have-Robots-Use-A-Marble-Slide-${{  github.ref_name }}.pdf README.md
+      - run: pandoc --standalone --self-contained --embed-resources --from markdown --output=How-To-Have-Robots-Use-A-Marble-Slide-${{ github.ref_name }}.pdf README.md
       - run: ls -al .
-      - name: release
-        uses: actions/create-release@v1
-        id: create_release
+      
+      - name: Create/Update Release and Upload PDF
+        uses: softprops/action-gh-release@v1
         with:
-              draft: false
-              prerelease: false
-              release_name: ${{ steps.get_version.outputs.VERSION }}
-              tag_name: ${{ github.ref }}
+          files: How-To-Have-Robots-Use-A-Marble-Slide-${{ github.ref_name }}.pdf
+          draft: false
+          prerelease: false
         env:
-              GITHUB_TOKEN: ${{ github.token }}
-              
-      - name: Upload PDF
-        uses: actions/upload-release-asset@v1
-        env:
-              GITHUB_TOKEN: ${{ github.token }}
-        with:
-              upload_url: ${{ steps.create_release.outputs.upload_url }}
-              asset_path: How-To-Have-Robots-Use-A-Marble-Slide-${{  github.ref_name }}.pdf
-              asset_name: How-To-Have-Robots-Use-A-Marble-Slide-${{  github.ref_name }}.pdf
-              asset_content_type: application/binary
+          GITHUB_TOKEN: ${{ github.token }}
